@@ -18,15 +18,18 @@
 </div>
 <?php  
     if(isset($_POST["addNew"])){
-        $catName = $_POST["catname"];
-        $image = $_POST["image"];
-        $status = $_POST["status"];
-        $datecreate = date("Y-m-d H:i:s");
+        // $catName = $_POST["catname"];
+        // $image = $_POST["image"];
+        // $status = $_POST["status"];
+        // $datecreate = date("Y-m-d H:i:s");
 
-        $sqlInsert = "INSERT INTO tbl_categorys(catname,image,`status`,datecreate)";
-        $sqlInsert .= " VALUES('$catName','$image','$status','$datecreate')";
+        // $sqlInsert = "INSERT INTO tbl_categorys(catname,image,`status`,datecreate)";
+        // $sqlInsert .= " VALUES('$catName','$image','$status','$datecreate')";
 
-        mysqli_query($conn,$sqlInsert) or die("Lỗi câu truy vấn");
+        //mysqli_query($conn,$sqlInsert) or die("Lỗi câu truy vấn");
+        $tableName="tbl_categorys";
+        $_POST["datecreate"] = date("Y-m-d H:i:s");
+        save($tableName,$_POST);
         header("location:index.php?view=listcategory");
     }
 ?>

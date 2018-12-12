@@ -23,10 +23,18 @@
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Danh mục</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-puzzle-piece"></i><a href="index.php?view=addcategory">Thêm mới</a></li>
+                            <li><i class="fa fa-id-badge"></i><a href="index.php?view=listcategory">Danh sách</a></li>
+                           
+                        </ul>
+                    </li>
+                    <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Sản phẩm</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-puzzle-piece"></i><a href="index.php?view=addproduct">Thêm mới</a></li>
-                            <li><i class="fa fa-id-badge"></i><a href="index.php?view=listproduct">Danh sách</a></li>
+                            <li><i class="fa fa-id-badge"></i><a href="ui-badges.html">Danh sách</a></li>
                            
                         </ul>
                     </li>

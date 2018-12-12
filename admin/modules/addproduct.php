@@ -17,29 +17,20 @@
     </div>
 </div>
 <?php  
-    if(isset($_POST["addNewPro"])){
-        $proname = $_POST["proname"];
-        $price = $_POST['proprice'];
-        $description = $_POST['description'];
-        $metakeyword = $_POST['metakeyword'];
-        $metadescription = $_POST['metadescription'];
-
-
-        $image = $_POST["image"];
-        $status = $_POST["status"];
-        $datecreate = date("Y-m-d H:i:s");
-
-        $sqlInsert = "INSERT INTO tbl_products(proname,image,`status`,datecreate,description,metadescription)";
-        $sqlInsert .= " VALUES('$proname','$image','$status','$datecreate','$metakeyword','$description')";
-
-        mysqli_query($conn,$sqlInsert) or die("Lỗi câu truy vấn");
+    if(isset($_POST["addNew"])){
+        // echo "<pre>";
+        // print_r($_POST);
+        // die;
+        $tableName="tbl_products";
+        $_POST["datecreate"] = date("Y-m-d H:i:s");
+        save($tableName,$_POST);
         header("location:index.php?view=listproduct");
     }
 ?>
 <div class="content mt-3">
     <div class="animated fadeIn">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-8">
                 <div class="card">
                     <div class="card-body">
                         <!-- Credit Card -->
@@ -47,28 +38,45 @@
                             <div class="card-body">
                                 <form action="" method="post" novalidate="novalidate">
                                     <div class="form-group">
-                                        <label for="cc-payment" class="control-label mb-1">Tên sản phẩm</label>
+                                        <label for="cc-payment" class="control-label mb-1">Tên SP</label>
                                         <input id="proname" name="proname"  type="text" class="form-control"/>
                                     </div>
                                     <div class="form-group">
-                                        <label for="cc-payment" class="control-label mb-1">Giá tiền</label>
+                                        <?php  
+                                            $sqlSelectCat = "SELECT * FROM tbl_categorys";
+                                            //thực thi truy vấn
+                                            $resultCat =mysqli_query($conn,$sqlSelectCat);
+                                            
+                                        ?>
+                                        <label for="cc-payment" class="control-label mb-1">Danh mục</label>
+                                        <select name="catid" id="catid">
+                                            <option value="">--Chọn Danh mục--</option>
+                                            <?php while($rowCat = mysqli_fetch_assoc($resultCat)){ ?>
+                                                <option value="<?php echo $rowCat["catid"] ?>"><?php echo $rowCat["catname"] ?></option>
+                                            <?php } ?>
+                                        </select>
+                                        <!-- <input id="proname" name="proname"  type="text" class="form-control"/> -->
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cc-payment" class="control-label mb-1">Ảnh</label>
+                                        <input id="image" name="image" type="file" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cc-payment" class="control-label mb-1">Giá</label>
                                         <input id="proprice" name="proprice"  type="text" class="form-control"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="cc-payment" class="control-label mb-1">Mô tả</label>
-                                        <input id="description" name="description"  type="text" class="form-control"/>
+                                        <textarea name="description" id="description" cols="85" rows="10"></textarea>
+                                        <!-- <input id="proprice" name="proprice"  type="text" class="form-control"/> -->
                                     </div>
-                                   <div class="form-group">
-                                        <label for="cc-payment" class="control-label mb-1">Ảnh</label>
-                                        <input id="image" name="image" type="file" />
-                                    </div> 
                                     <div class="form-group">
-                                        <label for="cc-payment" class="control-label mb-1">Key word</label>
-                                        <input id="metakeyword" name="metakeyword" type="text" class="form-control" />
-                                    </div>    
+                                        <label for="cc-payment" class="control-label mb-1">meta Keyword</label>
+                                        <input id="metakeyword" name="metakeyword"  type="text" class="form-control"/>
+                                    </div>
                                     <div class="form-group">
-                                        <label for="cc-payment" class="control-label mb-1">Meta des</label>
-                                        <input id="metadescription" name="metadescription" type="text" class="form-control" />
+                                        <label for="cc-payment" class="control-label mb-1">meta Description</label>
+                                        <input id="metadescription" name="metadescription"  type="text" class="form-control"/>
                                     </div>
                                     <div class="form-check">
                                         <div class="checkbox">
@@ -78,7 +86,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                       <input type="submit" value="Thêm mới" name="addNewPro" />
+                                       <input type="submit" value="Thêm mới" name="addNew" />
                                     </div>
                                 </form>
                             </div>
