@@ -47,7 +47,7 @@
                                         <th scope="row"><?php echo $i ?></th>
                                         <td><?php echo $row["catname"]?></td>
                                         <td>
-                                            <img src="<?php echo $row["image"] ?>" alt="">
+                                            <img src="../<?php echo $row["image"] ?>" alt="" width="100">
                                         </td>
                                         <td>
                                             <?php echo ($row["status"])?"Hiển thị":"Ẩn" ?>

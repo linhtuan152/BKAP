@@ -16,19 +16,28 @@
         </div>
     </div>
 </div>
-<?php  
+<?php 
+    $upload = '';
     if(isset($_POST["addNew"])){
-        // $catName = $_POST["catname"];
-        // $image = $_POST["image"];
-        // $status = $_POST["status"];
-        // $datecreate = date("Y-m-d H:i:s");
-
-        // $sqlInsert = "INSERT INTO tbl_categorys(catname,image,`status`,datecreate)";
-        // $sqlInsert .= " VALUES('$catName','$image','$status','$datecreate')";
-
-        //mysqli_query($conn,$sqlInsert) or die("Lỗi câu truy vấn");
+        if(isset($_FILES["image"]["name"])){
+            // echo "<pre>";
+            // print_r($_FILES["image"]);
+            // die;
+            if($_FILES["image"]["type"] =="image/jpeg" ||$_FILES["image"]["type"] =="image/gif" || $_FILES["image"]["type"] =="image/png" || $_FILES["image"]["type"] =="image/jpg"){
+                if($_FILES["image"]["error"]==0){
+                    //lưu file vào thư mục trên server
+                    move_uploaded_file($_FILES["image"]["tmp_name"], "../uploads/".$_FILES["image"]["name"]);
+                    $upload .='uploads/'. $_FILES["image"]["name"];
+                }else{
+                    echo "Lỗi file ";
+                }
+            }else{
+                echo "File không đúng yêu cầu";
+            }
+        }
         $tableName="tbl_categorys";
         $_POST["datecreate"] = date("Y-m-d H:i:s");
+        $_POST['image'] =  $upload;
         save($tableName,$_POST);
         header("location:index.php?view=listcategory");
     }
@@ -42,7 +51,7 @@
                         <!-- Credit Card -->
                         <div id="pay-invoice">
                             <div class="card-body">
-                                <form action="" method="post" novalidate="novalidate">
+                                <form action="" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label for="cc-payment" class="control-label mb-1">Tên danh mục</label>
                                         <input id="catname" name="catname"  type="text" class="form-control"/>

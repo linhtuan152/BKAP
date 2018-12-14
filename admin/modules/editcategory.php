@@ -25,17 +25,22 @@
 
     }
     if(isset($_POST["addNew"])){
-        $catName = $_POST["catname"];
-        $image = $_POST["image"];
-        $status = ($_POST["status"])?"1":"0";
-        $datecreate = date("Y-m-d H:i:s");
+        // $catName = $_POST["catname"];
+        // $image = $_POST["image"];
+        // $status = ($_POST["status"])?"1":"0";
+        // $datecreate = date("Y-m-d H:i:s");
 
         // $sqlInsert = "INSERT INTO tbl_categorys(catname,image,`status`,datecreate)";
         // $sqlInsert .= " VALUES('$catName','$image','$status','$datecreate')";
 
-        $sqlUpdate = "UPDATE tbl_categorys SET catname = '$catName',image='$image',`status`='$status' WHERE catid=".$_GET["id"];
+        // $sqlUpdate = "UPDATE tbl_categorys SET catname = '$catName',image='$image',`status`='$status' WHERE catid=".$_GET["id"];
+        // UPDATE tbl_categorys SET catname = 'Món khai vị',image = '',status = '1',datecreate = '2018-12-12 21:20:42' WHERE catid=1
 
-        mysqli_query($conn,$sqlUpdate) or die("Lỗi câu truy vấn");
+        // mysqli_query($conn,$sqlUpdate) or die("Lỗi câu truy vấn");
+        $tableName="tbl_categorys";
+        $condition = " catid=".$_GET["id"];
+        $_POST["datecreate"] = date("Y-m-d H:i:s");
+        update($tableName,$_POST,$condition);
         header("location:index.php?view=listcategory");
     }
 ?>

@@ -29,10 +29,26 @@
 			
 		}
 		$sqlInsert = "INSERT INTO $table ($field) VALUES ($value)";
+		// die($sqlInsert);
 		mysqli_query($conn,$sqlInsert) or die("Lỗi câu truy vấn");
 	}
 
-	function update($table,$dataPost){
-
+	function update($table,$dataPost,$condition){
+		global $conn;
+		$valFiled = "";
+		$i=0;
+		foreach ($dataPost as $key=>$val) {
+			if($key != "addNew"){
+				$i++;
+				if($i==1){
+					$valFiled .= "$key = '$val'";
+				}else{
+					$valFiled .= ",$key = '$val'";
+				}
+			}
+		}
+		$sqlUpdate = "UPDATE $table SET $valFiled WHERE $condition";
+		// die($sqlUpdate);
+		mysqli_query($conn,$sqlUpdate) or die("Lỗi câu truy vấn");
 	}
 ?>
