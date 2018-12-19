@@ -51,4 +51,12 @@
 		// die($sqlUpdate);
 		mysqli_query($conn,$sqlUpdate) or die("Lỗi câu truy vấn");
 	}
+
+	function getAll($table,$field="*",$condition=""){
+		global $conn;
+		$sqlSelect = "SELECT $field FROM $table $condition";
+		// die($sqlSelect);
+		$result =mysqli_query($conn,$sqlSelect) or die("Lỗi");
+		return $result;
+	}
 ?>
