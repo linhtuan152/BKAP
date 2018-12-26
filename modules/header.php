@@ -34,7 +34,15 @@
 										</li>
 										<li><a href="register.html"><i class="fa fa-plus" aria-hidden="true"></i> Đăng kí</a></li>
 									<?php } ?>
-									<li id="qty"><a href="cart.html"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Giỏ hàng <span>0</span></a></li>
+									<?php 
+										$total = 0; 
+										if(isset($_SESSION["cart"])){
+											foreach ($_SESSION["cart"] as $value) {
+												$total += $value["quanlity"];
+											}
+										}
+									?>
+									<li id="qty"><a href="index.php?view=cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Giỏ hàng <span id="cart"><?php echo $total; ?></span></a></li>
 								</ul>
 							</div>
 						</div>

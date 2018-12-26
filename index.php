@@ -21,10 +21,7 @@
 
 	<link href="css/owl.carousel.css" rel="stylesheet">
 	<link href="css/owl.theme.css" rel="stylesheet">
-	<script type="text/javascript" src="js/owl.carousel.js"></script>
-	<script type="text/javascript" src="js/menu.js"></script>
-	<script type="text/javascript" src="js/eat.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
 	<link href="css/baguetteBox.css" rel="stylesheet">
 
 	<link href="https://fonts.googleapis.com/css?family=Tinos:400,400i,700&amp;subset=vietnamese" rel="stylesheet">
@@ -65,6 +62,11 @@
 		}
 		include("modules/footer.php");
 	?>
+	<script src="js/jquery-2.2.4.js"></script>
+	<script type="text/javascript" src="js/owl.carousel.js"></script>
+	<script type="text/javascript" src="js/menu.js"></script>
+	<script type="text/javascript" src="js/eat.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/ajax.js"></script>
 	<script>
 		$(document).ready(function() {
@@ -86,7 +88,68 @@
 
 			});
 		});
+
+		function addCart(id){
+			//post lên xử lý mua hàng
+			$.post('cart.php', {'id':id}, function(data) {
+				$("#cart").text(data);
+				//lây thông tin 
+				img = $("#img_"+id).attr('src');
+				name = $("#namePro_"+id).text();
+				price = $("#price_"+id).text();
+				//gán lại thông tin
+				$("#showCart").attr('src',img);
+				$("#showName").text(name);
+				$("#showPrice").text(price);
+				//how modal
+				$('#cartModal').modal();
+			});
+		}
+
+		function updateCart(id){
+			number = $("#quantity_"+id).val();
+			$.post('cartupdate.php', {'id':id,'number':number}, function(data) {
+				$("#cart").text(data);
+				$("#listCat").load("index.php?view=cart #tablecart"); 
+			});
+		}
+
+		function deleteItem(id){
+			ok = confirm('bạn có chắc chắn xóa không? ');
+			if(ok){
+				$.post('delete.php', {'id':id}, function(data) {
+					$("#cart").text(data);
+					$("#listCat").load("index.php?view=cart #tablecart"); 
+				});
+			}
+		}
 	</script> 
+
+	<div class="modal fade bs-example-modal-sm" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	  <div class="modal-dialog modal-sm" role="document">
+	    <div class="modal-content">
+	       <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Thông tin mua hàng</h4>
+		      </div>
+		      <div class="modal-body">
+		      	<div class="row">
+			        <div class="col-md-6">
+			        	<img src="" alt="" id="showCart">
+			        </div>
+			        <div class="col-md-6">
+			        	<p id="showName"></p>
+			        	<p id="showPrice"></p>
+			        </div>
+		        </div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+	    </div>
+	  </div>
+	</div>
 </body>
 
 </html>

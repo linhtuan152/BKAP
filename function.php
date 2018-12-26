@@ -30,7 +30,8 @@
 		}
 		$sqlInsert = "INSERT INTO $table ($field) VALUES ($value)";
 		// die($sqlInsert);
-		mysqli_query($conn,$sqlInsert) or die("Lỗi câu truy vấn");
+		mysqli_query($conn,$sqlInsert) or die("Lỗi câu truy vấn " .$sqlInsert);
+		return mysqli_insert_id($conn);
 	}
 
 	function update($table,$dataPost,$condition){
@@ -58,5 +59,14 @@
 		// die($sqlSelect);
 		$result =mysqli_query($conn,$sqlSelect) or die("Lỗi");
 		return $result;
+	}
+
+	function getById($table,$field="*",$condition=""){
+		global $conn;
+		$sqlSelect = "SELECT $field FROM $table $condition";
+		// die($sqlSelect);
+		$result =mysqli_query($conn,$sqlSelect) or die("Lỗi ".$sqlSelect);
+		$data = mysqli_fetch_array($result);
+		return $data;
 	}
 ?>

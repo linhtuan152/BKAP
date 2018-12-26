@@ -45,15 +45,15 @@
 							<div class="pro_item hover8">
 								<div class="pro_img hover_img">
 									<a href="index.php?view=detailpro&id=<?php echo $rowpro["proid"] ?>">
-										<img src="<?php echo $rowpro["image"] ?>" class="img-responsive anhsp" />
+										<img id="img_<?php echo $rowpro["proid"] ?>" src="<?php echo $rowpro["image"] ?>" class="img-responsive anhsp" />
 									</a>
 								</div>
 								<div class="pro_name">
-									<a href="index.php?view=detailpro&id=<?php echo $rowpro["proid"] ?>"><?php echo $rowpro["proname"] ?></a>
+									<a href="index.php?view=detailpro&id=<?php echo $rowpro["proid"] ?>" id="namePro_<?php echo $rowpro["proid"] ?>" name="" value="" placeholder=""><?php echo $rowpro["proname"] ?></a>
 								</div>
 								<div class="pro_price">
 									<ul class="list-inline">
-										<li class="new_price"><?php echo number_format($rowpro["proprice"],0,",","."); ?> VNĐ</li>
+										<li class="new_price" id="price_<?php echo $rowpro["proid"] ?>"><?php echo number_format($rowpro["proprice"],0,",","."); ?> VNĐ</li>
 										<!-- <li class="old_price">40,000 VNĐ</li> -->
 									</ul>
 								</div>
@@ -63,7 +63,7 @@
 								</div> -->
 								<ul class="list-unstyled icon_lk">
 									<li><a href="index.php?view=detailpro&id=<?php echo $rowpro["proid"] ?>"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-									<li><a href="handle_cart.html?id=89&action=add" class="add-cart"><i class="fa fa-shopping-cart " aria-hidden="true"></i></a></li>
+									<li><a href="javascript:void(0)" class="add-cart"><i class="fa fa-shopping-cart " aria-hidden="true" onclick="addCart(<?php echo $rowpro["proid"] ?>)"></i></a></li>
 								</ul>
 							</div>
 						</div>
