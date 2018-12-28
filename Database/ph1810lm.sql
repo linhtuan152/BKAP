@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-12-21 20:22:00
+Date: 2018-12-26 19:49:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -60,6 +60,25 @@ INSERT INTO tbl_images VALUES ('4', '9', 'http://localhost:8080/ph1810lm-php/pro
 INSERT INTO tbl_images VALUES ('8', '8', 'http://localhost:8080/ph1810lm-php/project1/admin/admin.php?view=editimages&id=2', '1', '2018-12-17 22:22:27');
 
 -- ----------------------------
+-- Table structure for `tbl_orders`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_orders`;
+CREATE TABLE `tbl_orders` (
+  `order_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `total` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `date_create` datetime DEFAULT NULL,
+  `noidung` text,
+  PRIMARY KEY (`order_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_orders
+-- ----------------------------
+INSERT INTO tbl_orders VALUES ('1', '9', '210000', '1', '2018-12-26 13:42:07', 'Nội dung');
+
+-- ----------------------------
 -- Table structure for `tbl_products`
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_products`;
@@ -100,18 +119,17 @@ CREATE TABLE `users` (
   `user_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `full_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `password` char(32) COLLATE utf8_unicode_ci NOT NULL,
+  `mobile` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
   `gender` tinyint(1) DEFAULT NULL,
   `address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `roles` tinyint(1) DEFAULT '1',
   `desscription` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO users VALUES ('1', 'admin', 'Doan van Nang', '987654321', 'dvnang@gmail.com', '1', 'ha noi', 'mo ta');
-INSERT INTO users VALUES ('3', 'admin2', 'Doan van Nang', '123456', 'dvnang@gmail.com', '1', 'ha noi', 'mo ta');
-INSERT INTO users VALUES ('4', 'admin3', 'Doan van Nang3', '123455', 'dvnang1@gmail.com', '1', 'ha noi1', 'mo ta1');
-INSERT INTO users VALUES ('5', 'admin4', 'Doan van Nang', '123456', 'dvnang@gmail.com', '1', 'ha noi', 'mo ta');
-INSERT INTO users VALUES ('6', 'admin5', 'Doan van Nang1', '123455', 'dvnang1@gmail.com', '1', 'ha noi1', 'mo ta1');
+INSERT INTO users VALUES ('1', 'admin', 'Doan van Nang', '987654321', '', 'dvnang@gmail.com', '1', 'ha noi', '0', 'mo ta');
+INSERT INTO users VALUES ('9', 'yutfmpyj', 'Nang doan', 'yutfmpyj', '123456798', 'dvnang@gmmail.com', null, '456123', '1', null);
